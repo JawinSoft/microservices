@@ -1,0 +1,13 @@
+package com.spring.boot.msk.country;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class CountryServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
