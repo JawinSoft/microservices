@@ -39,5 +39,24 @@ public class CountryRepository {
 		
 		
 	}
+
+	public Country getAllCountryByCode(String countryCode) {
+			String query = "select code, name, continent, population from country where code=?";
+		
+		RowMapper<Country> rm = new RowMapper<Country>() {
+
+			@Override
+			public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Country country = new Country();
+				country.setCode(rs.getString("Code"));
+				country.setName(rs.getString("name"));
+				country.setContinent(rs.getString("continent"));
+				country.setPopulate(rs.getLong("population"));
+				return country;
+			}
+		};
+		
+		return jdbcTemplate.queryForObject(query,new Object[] {countryCode}, rm);
+	}
 	
 }

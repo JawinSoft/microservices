@@ -3,74 +3,104 @@ package com.spring.boot.msk.mobile.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
-import javax.annotation.PostConstruct;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.boot.msk.mobile.dto.MobileDTO;
+import com.spring.boot.msk.mobile.dto.SaveMobileRequest;
+import com.spring.boot.msk.mobile.dto.UpdateMobileRequest;
+import com.spring.boot.msk.mobile.entity.Lob;
+import com.spring.boot.msk.mobile.entity.Mobile;
+import com.spring.boot.msk.mobile.entity.Status;
 import com.spring.boot.msk.mobile.exception.MobileNotFoundException;
-import com.spring.boot.msk.mobile.model.Mobile;
+import com.spring.boot.msk.mobile.repository.MobileRepository;
 
 @Service
 public class MobileService {
 
-	private List<Mobile> moblies = new ArrayList<>();
+	
+	@Autowired
+	private MobileRepository mobileRepository;	
+	
 
-	public Mobile getMobileById(int mobileId) {
-
-		Optional<Mobile> mobileFound = moblies.stream().filter(mobile -> mobile.getId() == mobileId).findFirst();
-
-		try {
-			TimeUnit.SECONDS.sleep(20);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		
-		if (!mobileFound.isPresent()) {
+	public MobileDTO getMobileById(int mobileId) {
+		Optional<Mobile> mobile =  mobileRepository.findById(mobileId);
+		if(!mobile.isPresent()) {
 			throw new MobileNotFoundException(mobileId);
 		}
-
-		return mobileFound.get();
+		Mobile dbMobile=  mobile.get();
+		
+		return convertEntityToDTO(dbMobile);
+		
 	}
 
-	@PostConstruct
-	public void initMobiles() {
-		moblies.add(new Mobile(1, "Samsung", 10000));
-		moblies.add(new Mobile(2, "MI", 12000));
-		moblies.add(new Mobile(3, "Honor 20", 15000));
-		moblies.add(new Mobile(4, "Redmi Note 8 Pro", 11500));
-		moblies.add(new Mobile(5, "Vivo S1 Pro", 12000));
-		moblies.add(new Mobile(6, "OPPO A52020", 14000));
-		moblies.add(new Mobile(7, "Nokia 6.2", 16000));
+	public List<MobileDTO> getMoblies() {
+		Iterable<Mobile> dbMobiles= mobileRepository.findAll();
+		
+		 List<MobileDTO> mobiles = new ArrayList<>();
+		 
+		 dbMobiles.forEach( dbMobile -> mobiles.add( convertEntityToDTO(dbMobile)));
+		 
+		 return mobiles;
 	}
 
-	public List<Mobile> getMoblies() {
-		return moblies;
+
+	public MobileDTO save(SaveMobileRequest saveMobile) {
+
+    	Mobile mobile = Mobile.builder()
+				.name(saveMobile.getName())
+				.countryCode(saveMobile.getCountryCode())
+				.lob(Lob.valueOf(saveMobile.getLob()))
+				.status(Status.valueOf(saveMobile.getStatus()))
+				.price(saveMobile.getPrice())
+				.build();
+    	mobileRepository.save(mobile);
+    	
+    	return convertEntityToDTO(mobile);
+		
 	}
 
-	public void setMoblies(List<Mobile> moblies) {
-		this.moblies = moblies;
-	}
-
-	public Mobile save(Mobile mobile) {
-
-		Optional<Mobile> mobileFound = moblies.stream().filter(dbMobile -> dbMobile.getId() == mobile.getId())
-				.findFirst();
-		if (!mobileFound.isPresent()) {
-			moblies.add(mobile);
-		}
-		return mobile;
-	}
-
+	
 	public void deleteMobile(int mobileId) {
-		// TO-DO -- Delete mobile number by ID
+		Optional<Mobile> mobile =  mobileRepository.findById(mobileId);
+		if(!mobile.isPresent()) {
+			throw new MobileNotFoundException(mobileId);
+		}
+		
+		mobile.get().setIsActive(false);
+		
+		mobileRepository.save(mobile.get());
+	}
+	
+
+	public Mobile update(UpdateMobileRequest updateMobile) {
+		Mobile mobile = Mobile.builder()
+				.id(updateMobile.getId())
+				.name(updateMobile.getName())
+				.countryCode(updateMobile.getCountryCode())
+				.lob(Lob.valueOf(updateMobile.getLob()))
+				.status(Status.valueOf(updateMobile.getStatus()))
+				.price(updateMobile.getPrice())
+				.build();
+		
+		return mobileRepository.save(mobile);
+		
+		
 	}
 
-	public Mobile update(Mobile mobile) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	private MobileDTO convertEntityToDTO(Mobile mobile) {
+		return MobileDTO.builder()
+				.id(mobile.getId())
+				.countryCode(mobile.getCountryCode())
+				.lob(mobile.getLob().name())
+				.name(mobile.getName())
+				.status(mobile.getStatus().name())
+				.publictionDate(mobile.getPublicationDate().toString())
+				.price(mobile.getPrice())
+				.build();
+		
 	}
-
 }

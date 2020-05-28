@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.spring.boot.msk.common.dto.ErrorDetails;
+
 @ControllerAdvice
 public class GlobalMobileNotFoundExceptionHandler {
 	
@@ -19,15 +21,7 @@ public class GlobalMobileNotFoundExceptionHandler {
 	}
 	
 	
-	/*@ExceptionHandler(Throwable.class)
-	public ResponseEntity<ErrorDetails> handleMobileNotFoundException(Throwable ex){
-	    
-	  return ResponseEntity
-			.status(HttpStatus.INTERNAL_SERVER_ERROR)
-			.body(
-					new ErrorDetails(10009,ex.getMessage() )
-				);    
-	}*/
+	
 
 
 }

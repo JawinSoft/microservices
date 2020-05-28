@@ -1,8 +1,5 @@
 package com.spring.boot.msk.mobile.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 //@ResponseStatus(value=HttpStatus.BAD_REQUEST, reason="Mobile Not Found")
 public class MobileNotFoundException extends RuntimeException {
 

@@ -1,21 +1,8 @@
 package com.spring.boot.msk.mobile;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-
-import com.spring.boot.msk.mobile.model.Mobile;
 
 @SpringBootApplication
 public class MobileServiceClientApplication {
@@ -23,22 +10,14 @@ public class MobileServiceClientApplication {
 	@Value("${base-url}")
 	private String baseUrl;
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	
-
 	public static void main(String[] args) {
 		SpringApplication.run(MobileServiceClientApplication.class, args);
 	}
 	
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
 	
 	
 	
-	@Bean
+	/*@Bean
 	public CommandLineRunner start() {
 		return args -> {
 			System.out.println("Fetch Mobile Info Start >>>>>");
@@ -69,6 +48,6 @@ public class MobileServiceClientApplication {
 			
 		};//end command Line runner
 		
-	}
+	}*/
 
 }

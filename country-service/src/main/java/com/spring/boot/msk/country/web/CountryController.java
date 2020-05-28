@@ -15,11 +15,16 @@ public class CountryController {
 	@Autowired
 	private CountryRepository countryRepository;
 
-
-	@GetMapping("getAllCountries")
-	public List<Country> getAllCouuntries(){
+    //Response 
+	@GetMapping("countries")
+	public List<Country> getAllCountries(){
 		return countryRepository.getAllCountries();
 	}
 	
+	
+	@GetMapping("countries/{country-code}")
+	public Country getAllCountryByCode(String countryCode){
+		return countryRepository.getAllCountryByCode(countryCode);
+	}
 	
 }
