@@ -1,4 +1,4 @@
-package com.spring.boot.msk.mobile.dto;
+package com.spring.boot.msk.common.dto;
 
 import lombok.Builder;
 import lombok.Data;

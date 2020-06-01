@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.boot.msk.common.dto.MobileDTO;
 import com.spring.boot.msk.common.dto.Response;
-import com.spring.boot.msk.mobile.dto.MobileDTO;
-import com.spring.boot.msk.mobile.dto.SaveMobileRequest;
-import com.spring.boot.msk.mobile.dto.UpdateMobileRequest;
+import com.spring.boot.msk.common.dto.SaveMobileRequest;
+import com.spring.boot.msk.common.dto.UpdateMobileRequest;
 import com.spring.boot.msk.mobile.service.MobileService;
 
 
@@ -32,9 +32,9 @@ public class MobileController {
 	private MobileService mobileService;
 	
 	@GetMapping("{mobileId}")//{mobileId} --> Path Variable
-	public Response getMobileById(@PathVariable("mobileId") int id) {
+	public Response<MobileDTO> getMobileById(@PathVariable("mobileId") int id) {
 		MobileDTO mobileDTO= mobileService.getMobileById(id);
-		return Response.builder().response(mobileDTO).build();
+		return Response.<MobileDTO>builder().response(mobileDTO).build();
 	}
 	
 	/**
@@ -44,30 +44,28 @@ public class MobileController {
 	 */
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public  Response saveMobile(@RequestBody @Valid SaveMobileRequest saveMobile) {		
+	public  Response<MobileDTO> saveMobile(@RequestBody @Valid SaveMobileRequest saveMobile) {		
 		MobileDTO mobileDTO=  mobileService.save(saveMobile); 
-		return Response.builder().response(mobileDTO).build();
+		return Response.<MobileDTO>builder().response(mobileDTO).build();
 	}
 	
 	@GetMapping
-	public Response getAllMobiles(){
+	public Response<List<MobileDTO>> getAllMobiles(){
 		List<MobileDTO> mobilesDtos =  mobileService.getMoblies();
 		
-		return Response.builder().response(mobilesDtos).build();
+		return Response.<List<MobileDTO>>builder().response(mobilesDtos).build();
 	}
 	
 	@DeleteMapping("{mobile-id}")
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public Response deleteMobileById(@PathVariable("mobile-id") int mobileId) {
+	public Response<Boolean> deleteMobileById(@PathVariable("mobile-id") int mobileId) {
 		mobileService.deleteMobile(mobileId);
-		return Response.builder().response(true).build();
+		return Response.<Boolean>builder().response(true).build();
 	}
 	
 	@PutMapping
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public  Response updateMobile(@RequestBody @Valid UpdateMobileRequest mobile) {
+	public  Response<Boolean> updateMobile(@RequestBody @Valid UpdateMobileRequest mobile) {
 		 mobileService.update(mobile); 
-		 return Response.builder().response(true).build();
+		 return Response.<Boolean>builder().response(true).build();
 	}
 
 

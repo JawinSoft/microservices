@@ -7,11 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Response {
-	
-	private Object response;
-	
-	private List<ErrorDetails> erros; 
+public class Errors {
 
-
+	private List<Error> errors;
 }

@@ -1,0 +1,41 @@
+package com.spring.boot.msk.country.service;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.boot.msk.country.model.Country;
+import com.spring.boot.msk.country.repository.CountryRepository;
+
+@Service
+public class CountryService {
+
+	@Autowired
+	private CountryRepository countryRepository;
+	
+	public Country getCountryByCode(String countryCode) {
+		return countryRepository.getCountryByCode(countryCode);
+	}
+
+	public List<Country> getAllCountries() {
+		return countryRepository.getAllCountries();
+	}
+
+	//IncorrectResultSizeDataAccessException
+	// IND
+	public Country getCountryByRegion(String region) {
+		return countryRepository.getCountryByReigon(region);
+	}
+
+	public Country updateMobile(@Valid Country country) {
+		return countryRepository.updateMobile(country);
+	}
+
+	public void deleteCountry(String countryCode) {
+		countryRepository.deleteCountry(countryCode);
+	}
+
+}

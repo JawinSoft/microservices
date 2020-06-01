@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.boot.msk.mobile.dto.MobileDTO;
-import com.spring.boot.msk.mobile.dto.SaveMobileRequest;
-import com.spring.boot.msk.mobile.dto.UpdateMobileRequest;
+import com.spring.boot.msk.common.dto.MobileDTO;
+import com.spring.boot.msk.common.dto.SaveMobileRequest;
+import com.spring.boot.msk.common.dto.UpdateMobileRequest;
 import com.spring.boot.msk.mobile.entity.Lob;
 import com.spring.boot.msk.mobile.entity.Mobile;
 import com.spring.boot.msk.mobile.entity.Status;

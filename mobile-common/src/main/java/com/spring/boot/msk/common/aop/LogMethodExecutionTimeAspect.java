@@ -13,8 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LogMethodExecutionTimeAspect {
 	
 	
-
-	@Around("withMobileServiceAllMethods() || withMobileAccessoriesServiceAllMethods()")
+	@Around("withMobileServiceAllMethods() || withMobileAccessoriesServiceAllMethods() || withCountryServiceAllMethods() ")
 	public Object  logEachMethodExecutionTime(ProceedingJoinPoint pjp) {
 		
 		long startTime = System.currentTimeMillis();
@@ -37,6 +36,10 @@ public class LogMethodExecutionTimeAspect {
 	
 	@Pointcut("within(com.spring.boot.msk.mobile..*)")
 	public void withMobileServiceAllMethods() {}
+	
+	
+	@Pointcut("within(com.spring.boot.msk.country..*)")
+	public void withCountryServiceAllMethods() {}
 	
 	
 	@Pointcut("within(com.spring.boot.msk.accessories..*)")

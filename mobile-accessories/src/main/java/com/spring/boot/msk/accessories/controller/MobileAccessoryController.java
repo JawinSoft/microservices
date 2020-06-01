@@ -1,5 +1,7 @@
 package com.spring.boot.msk.accessories.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +32,13 @@ public class MobileAccessoryController {
 	private MobileAccessoryService mobileAccessoryService;
 
 	@PostMapping
-	public Mono<Response> saveMobileAccessory(@RequestBody @Valid SaveMobileAccessoryRequest request) {
+	public Mono<Response<MobileAccessory>> saveMobileAccessory(@RequestBody @Valid SaveMobileAccessoryRequest request) {
 		Mono<MobileAccessory> savedMobileAccessoryMono =  mobileAccessoryService.saveMobileAccessory(request);
 		
 		log.info("1111 "+Thread.currentThread().getName());
 		
 		return savedMobileAccessoryMono.map(savedMobileAccessory -> {
-			Response finalResponse =  Response.builder().response(savedMobileAccessory).build();
+			Response<MobileAccessory> finalResponse =  Response.<MobileAccessory>builder().response(savedMobileAccessory).build();
 			log.info("222 "+Thread.currentThread().getName());
 			return finalResponse;	
 		});
@@ -45,7 +47,7 @@ public class MobileAccessoryController {
 	}
 	
 	@GetMapping
-	public Mono<Response> getAllMobileAccessories(){
+	public Mono<Response<List<MobileAccessory>>> getAllMobileAccessories(){
 		Flux<MobileAccessory> allMobileAccessoriesFlux = mobileAccessoryService.getAllMobileAccessories();
 		
 		log.info("1111 "+Thread.currentThread().getName());
@@ -56,17 +58,17 @@ public class MobileAccessoryController {
 					
 					log.info("2222 "+Thread.currentThread().getName());
 					
-				Response finalResponse = Response.builder().response(allMobileAccessories).build();
+				Response<List<MobileAccessory>> finalResponse = Response.<List<MobileAccessory>>builder().response(allMobileAccessories).build();
 				return finalResponse;
 				
 		});
 	}
 	
 	@GetMapping("{mobile-accessory-code}")
-	public Mono<Response> getMobileAccessoryByUUID(@PathVariable("mobile-accessory-code") String mobileAccessoryCode){
+	public Mono<Response<MobileAccessory>> getMobileAccessoryByUUID(@PathVariable("mobile-accessory-code") String mobileAccessoryCode){
 		 return mobileAccessoryService
 				 .getMobileAccessoryByUUID(mobileAccessoryCode)
-		 		 .map(mobileAccessory ->  Response.builder().response(mobileAccessory).build());
+		 		 .map(mobileAccessory ->  Response.<MobileAccessory>builder().response(mobileAccessory).build());
 	}
 	
 	
