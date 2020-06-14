@@ -1,6 +1,4 @@
-package com.spring.boot.msk.common.dto;
-
-import java.util.List;
+package com.spring.boot.msk.mobileclient.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Errors {
+public class CreateTokenRequest {
 
-	private List<Error> errors;
+	private String userName;
+	private String password;
+	
 }

@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.spring.boot.msk.accessories.model.MobileAccessory;
 import com.spring.boot.msk.accessories.repository.MobileAccessoriesRepository;
 import com.spring.boot.msk.accessories.service.MobileAccessoryService;
 import com.spring.boot.msk.accessories.service.MobileAccessoryServiceImpl;
+import com.spring.boot.msk.common.model.MobileAccessory;
 
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;

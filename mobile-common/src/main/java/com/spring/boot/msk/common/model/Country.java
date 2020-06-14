@@ -1,13 +1,17 @@
-package com.spring.boot.msk.country.model;
+package com.spring.boot.msk.common.model;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Country {
 	
 	

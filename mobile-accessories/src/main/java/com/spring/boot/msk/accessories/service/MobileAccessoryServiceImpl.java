@@ -1,22 +1,19 @@
 package com.spring.boot.msk.accessories.service;
 
+import static org.springframework.util.StringUtils.isEmpty;
+
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.spring.boot.msk.accessories.dto.SaveMobileAccessoryRequest;
 import com.spring.boot.msk.accessories.exception.MobileAccessoryNotFoundException;
-import com.spring.boot.msk.accessories.model.MobileAccessory;
 import com.spring.boot.msk.accessories.repository.MobileAccessoriesRepository;
-import static org.springframework.util.StringUtils.isEmpty;
+import com.spring.boot.msk.common.model.MobileAccessory;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import static java.util.Objects.isNull;
 
 
 @Service
@@ -45,8 +42,8 @@ public class MobileAccessoryServiceImpl implements MobileAccessoryService {
 
 
 	@Override
-	public Flux<MobileAccessory> getAllMobileAccessories() {
-		return mobileAccessoriesRepository.findAll();
+	public Flux<MobileAccessory> getAllMobileAccessories(String mobileType) {
+		return mobileAccessoriesRepository.findByMobileType(mobileType);
 	}
 
 

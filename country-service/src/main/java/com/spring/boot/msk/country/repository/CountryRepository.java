@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.spring.boot.msk.country.model.Country;
+import com.spring.boot.msk.common.model.Country;
 
 @Repository
 public class CountryRepository {
@@ -46,8 +46,8 @@ public class CountryRepository {
 			return Country
 					.builder()
 					.code(rs.getString("code"))
-					.name("name")
-					.description("name")
+					.name(rs.getString("name"))
+					.description(rs.getString("name"))
 					.continent(rs.getString("continent"))
 					.region(rs.getString("region"))
 					.population(rs.getLong("population")).build();

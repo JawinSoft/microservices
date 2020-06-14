@@ -18,7 +18,12 @@
   <name>mobile-common</name>
   <description>A simple mobile-common.</description>
   
-
+  <dependencies>
+        <dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-webflux-ui</artifactId>
+		    <version>1.2.32</version>
+		</dependency>
+  </dependencies>
   
-  
-</project>
+  </project>

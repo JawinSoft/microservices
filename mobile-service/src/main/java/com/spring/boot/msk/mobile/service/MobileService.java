@@ -1,5 +1,6 @@
 package com.spring.boot.msk.mobile.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +41,7 @@ public class MobileService {
 		
 		 List<MobileDTO> mobiles = new ArrayList<>();
 		 
+		 if(null != dbMobiles)
 		 dbMobiles.forEach( dbMobile -> mobiles.add( convertEntityToDTO(dbMobile)));
 		 
 		 return mobiles;
@@ -55,6 +57,7 @@ public class MobileService {
 				.status(Status.valueOf(saveMobile.getStatus()))
 				.price(saveMobile.getPrice())
 				.build();
+    	mobile.setPublicationDate(LocalDate.now());
     	mobileRepository.save(mobile);
     	
     	return convertEntityToDTO(mobile);
@@ -98,7 +101,7 @@ public class MobileService {
 				.lob(mobile.getLob().name())
 				.name(mobile.getName())
 				.status(mobile.getStatus().name())
-				.publictionDate(mobile.getPublicationDate().toString())
+				//.publictionDate(mobile.getPublicationDate().toString())
 				.price(mobile.getPrice())
 				.build();
 		

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.boot.msk.common.dto.Response;
-import com.spring.boot.msk.country.model.Country;
+import com.spring.boot.msk.common.model.Country;
 import com.spring.boot.msk.country.service.CountryService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -33,7 +33,7 @@ public class CountryController {
 		return Response.<Country>builder().response(country).build();
 	}
 	
-	@GetMapping("{region}")
+	@GetMapping("region/{region}")
 	public Response<Country> getCountryByRegion(@PathVariable("region") String region) {
 		Country country =  countryService.getCountryByRegion(region);
 		return Response.<Country>builder().response(country).build();

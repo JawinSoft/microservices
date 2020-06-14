@@ -7,7 +7,7 @@
 		<groupId>com.spring.services</groupId>
 		<artifactId>msk-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
 	</parent>
 	
 	<groupId>com.spring.boot.msk</groupId>
@@ -48,13 +48,7 @@
 		  <groupId>com.spring.boot.msk.common</groupId>
   		  <artifactId>mobile-common</artifactId>
   		  <version>0.0.1-SNAPSHOT</version>
-		</dependency>
-			<dependency>
-		  <groupId>com.spring.boot.msk.common</groupId>
-  		  <artifactId>mobile-common</artifactId>
-  		  <version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		 
+		</dependency>		 
 	</dependencies>
 
 </project>

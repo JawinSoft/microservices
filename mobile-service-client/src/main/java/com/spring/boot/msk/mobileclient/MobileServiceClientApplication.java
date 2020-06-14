@@ -1,29 +1,13 @@
-package com.spring.boot.msk.mobile;
+package com.spring.boot.msk.mobileclient;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import com.spring.boot.msk.common.dto.Response;
-
-import com.spring.boot.msk.mobile.model.Mobile;
-
-import reactor.core.publisher.Mono;
 
 
 @SpringBootApplication
 public class MobileServiceClientApplication {
 	
-	@Value("${base-url}")
-	private String baseUrl;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MobileServiceClientApplication.class, args);
@@ -31,33 +15,34 @@ public class MobileServiceClientApplication {
 	
 	
 	
-	@Bean
+	/*@Bean
 	public CommandLineRunner start() {
 		return args -> {
 			
-			String baseUrl = "http://localhost:8080/msk/mobiles";
+			//String baseUrl = "http://localhost:8080/msk/mobiles";
 			
-			WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+			WebClient webClient = WebClient.builder().baseUrl(baseUrl +"mobiles/2").build();
 			
-			Mono<Response<List<Mobile>>> allMobiles =  
+			Mono<Response<Mobile>> allMobiles =  
 					webClient
 					.get()
 					.accept(MediaType.APPLICATION_JSON)
 			        .retrieve()
-			        .bodyToMono(new ParameterizedTypeReference<Response<List<Mobile>>>() {});
+			        .bodyToMono(new ParameterizedTypeReference<Response<Mobile>>() {});
 			
-			//Mobile mobile  = allMobile.block().getResponse();
+			Mobile mobile  = allMobiles.block().getResponse();
 			
+			System.out.println(mobile+" -- ");
 			
-			Response<List<Mobile>> resonse = allMobiles.block();
+			//Response<List<Mobile>> resonse = allMobiles.block();
 			
-			resonse.getResponse().forEach(System.out::println);
+			//resonse.getResponse().forEach(System.out::println);
 		
 	  };
 	}
 	
 	
-	/*@Bean
+	@Bean
 	public CommandLineRunner start() {
 		return args -> {
 			System.out.println("Fetch Mobile Info Start >>>>>");

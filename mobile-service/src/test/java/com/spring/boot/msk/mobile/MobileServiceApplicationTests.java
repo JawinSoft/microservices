@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MobileServiceApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void dummyTest() {
+		System.out.println("Welcome to Junit ...");
 	}
 
 }

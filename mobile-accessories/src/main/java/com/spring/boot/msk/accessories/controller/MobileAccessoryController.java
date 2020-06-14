@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.boot.msk.accessories.dto.SaveMobileAccessoryRequest;
-import com.spring.boot.msk.accessories.model.MobileAccessory;
 import com.spring.boot.msk.accessories.service.MobileAccessoryService;
 import com.spring.boot.msk.common.dto.Response;
+import com.spring.boot.msk.common.model.MobileAccessory;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
@@ -46,9 +46,9 @@ public class MobileAccessoryController {
 		
 	}
 	
-	@GetMapping
-	public Mono<Response<List<MobileAccessory>>> getAllMobileAccessories(){
-		Flux<MobileAccessory> allMobileAccessoriesFlux = mobileAccessoryService.getAllMobileAccessories();
+	@GetMapping("all/{mobile-type}")
+	public Mono<Response<List<MobileAccessory>>> getAllMobileAccessories(@PathVariable(value = "mobile-type") String mobileType){
+		Flux<MobileAccessory> allMobileAccessoriesFlux = mobileAccessoryService.getAllMobileAccessories(mobileType);
 		
 		log.info("1111 "+Thread.currentThread().getName());
 		

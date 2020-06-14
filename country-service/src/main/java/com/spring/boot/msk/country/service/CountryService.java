@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.boot.msk.country.model.Country;
+import com.spring.boot.msk.common.model.Country;
 import com.spring.boot.msk.country.repository.CountryRepository;
 
 @Service
