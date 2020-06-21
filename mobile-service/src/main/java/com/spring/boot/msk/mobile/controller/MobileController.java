@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +32,18 @@ public class MobileController {
 	@Autowired
 	private MobileService mobileService;
 	
+	@Autowired
+	private Environment env;
+	
+	
 	@GetMapping("{mobileId}")//{mobileId} --> Path Variable
 	public Response<MobileDTO> getMobileById(@PathVariable("mobileId") int id) {
+		
+		String port = env.getProperty("local.server.port");
+		
+		
 		MobileDTO mobileDTO= mobileService.getMobileById(id);
+		mobileDTO.setServerPort(port);
 		return Response.<MobileDTO>builder().response(mobileDTO).build();
 	}
 	

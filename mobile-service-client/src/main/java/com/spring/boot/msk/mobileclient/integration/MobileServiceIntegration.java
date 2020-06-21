@@ -99,6 +99,7 @@ public class MobileServiceIntegration {
 															.name(mobileDto.getName())
 															.price(mobileDto.getPrice())
 															.publictionDate(mobileDto.getPublictionDate())
+															.serverPort(mobileDto.getServerPort())
 															.status(mobileDto.getStatus()).build();
 										
 				

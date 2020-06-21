@@ -24,4 +24,6 @@ public class MobileDTO {
 	private String countryCode;
 	
 	private String publictionDate;
+	
+	private String serverPort;
 }

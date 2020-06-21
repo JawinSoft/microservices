@@ -28,6 +28,8 @@ public class MobileInfo {
 	private String lob;
 
 	private String publictionDate;
+	
+	private String serverPort;
 
 	private Country country;
 
